@@ -50,9 +50,9 @@ a { color: inherit; }
 }
 
 .nameIcon{
-  width: min(640px, 86vw);
+  max-width: 520px;
+  width: 86vw;
   height: auto;
-  display: block;
 }
 
 .subtitle {
