@@ -3,6 +3,11 @@ import './App.css'
 
 // ICONOS / LABELS
 import namePng from './assets/icons/name-icon.png'
+import finishedPng from './assets/icons/finished-icon.png'
+import sketchbookPng from './assets/icons/sketchbook-icon.png'
+import animationsPng from './assets/icons/animations-icon.png'
+import craftsPng from './assets/icons/crafts-icon.png'
+import contactPng from './assets/icons/contact-icon.png'
 
 // DIBUJOS TERMINADOS
 import finished1 from './assets/art/finished/finished-1.jpg'
@@ -13,6 +18,12 @@ import finished3 from './assets/art/finished/finished-3.jpg'
 import sketch1 from './assets/art/sketchbook/page-1.jpg'
 import sketch2 from './assets/art/sketchbook/page-2.jpg'
 import sketch3 from './assets/art/sketchbook/page-3.jpg'
+import sketch4 from './assets/art/sketchbook/page-4.jpg'
+import sketch5 from './assets/art/sketchbook/page-5.jpg'
+import sketch6 from './assets/art/sketchbook/page-6.jpg'
+import sketch7 from './assets/art/sketchbook/page-7.jpg'
+import sketch8 from './assets/art/sketchbook/page-8.jpg'
+import sketch9 from './assets/art/sketchbook/page-9.jpg'
 
 // ANIMACIONES (MP4)
 import anim1 from './assets/art/animations/animation-1.mp4'
@@ -53,7 +64,8 @@ export default function App() {
         []
     )
 
-    const sketchPages = useMemo(() => [sketch1, sketch2, sketch3], [])
+    const sketchPages = useMemo(() => [sketch1, sketch2, sketch3, sketch4, sketch5,
+    sketch6, sketch7, sketch8, sketch9], [])
     const [page, setPage] = useState(0)
     const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
@@ -74,7 +86,7 @@ export default function App() {
     // Artesanía: proyectos con varias fotos
     const craftProjects: CraftProject[] = useMemo(
         () => [
-            { title: 'Arcilla · Serie 1', photos: [craftA1, craftA2, craftA3] }
+            { title: 'Bañera', photos: [craftA1, craftA2, craftA3] }
         ],
         []
     )
@@ -101,7 +113,7 @@ export default function App() {
             <main>
                 {/* TERMINADOS */}
                 <section id="finished" className="section">
-                    <h2>Galería · Dibujos terminados</h2>
+                    <img className="sectionTitleIcon" src={finishedPng} alt="Mis dibujos digitales:" />
                     <p>Una selección de piezas finalizadas.</p>
 
                     <div className="grid">
@@ -120,8 +132,8 @@ export default function App() {
 
                 {/* SKETCHBOOK */}
                 <section id="sketchbook" className="section">
-                    <h2>Sketchbook</h2>
-                    <p>Desliza en móvil o usa ← → para pasar páginas.</p>
+                    <img className="sectionTitleIcon" src={sketchbookPng} alt="Mi libreta de dibujo:" />
+                    <p>Desliza en móvil o usa las flechas para pasar páginas.</p>
 
                     <div className="sketchWrap">
                         <div
@@ -161,7 +173,7 @@ export default function App() {
 
                 {/* ANIMACIONES */}
                 <section id="animations" className="section">
-                    <h2>Animaciones</h2>
+                    <img className="sectionTitleIcon" src={animationsPng} alt="Mis animaciones:" />
                     <p>Piezas animadas en vídeo.</p>
 
                     <div className="grid">
@@ -186,7 +198,7 @@ export default function App() {
 
                 {/* ARTESANÍA */}
                 <section id="crafts" className="section">
-                    <h2>Proyectos artesanos</h2>
+                    <img className="sectionTitleIcon" src={craftsPng} alt="Mis proyectos artesanos:" />
                     <p>Arcilla, piezas físicas, procesos y encargos.</p>
 
                     <div className="grid">
@@ -201,7 +213,7 @@ export default function App() {
 
                 {/* CONTACTO */}
                 <section id="contact" className="section">
-                    <h2>Contacto</h2>
+                    <img className="sectionTitleIcon" src={contactPng} alt="Mi contacto:" />
                     <p>
                         Email: <a href="mailto:mariagmesa37@gmail.com">mariagmesa37@gmail.com</a>
                         <br />

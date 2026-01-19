@@ -44,6 +44,12 @@ a { color: inherit; }
   object-fit: contain;
 }
 
+.sectionTitleIcon{
+  max-width: 320px;
+  width: 86vw;
+  height: auto;
+}
+
 .brandText{
   display: grid;
   gap: 6px;
