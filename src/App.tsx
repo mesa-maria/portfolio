@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
 // ICONOS / LABELS
-import titleIcon from './assets/icons/title-icon.png'
 import namePng from './assets/icons/name-icon.png'
 
 // DIBUJOS TERMINADOS
@@ -84,9 +83,6 @@ export default function App() {
         <div className="page">
             <header className="header">
                 <div className="brand">
-                    {/* Si no quieres icono aparte, puedes borrar esta línea */}
-                    <img className="titleIcon" src={titleIcon} alt="" />
-
                     <div className="brandText">
                         <img className="nameIcon" src={namePng} alt="María Mesa" />
                         <p className="subtitle">Illustration • Sketchbook • Handmade • Web</p>
