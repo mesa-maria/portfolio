@@ -3,7 +3,8 @@ import './App.css'
 
 // 1) TU ICONO DE CABECERA (pon tu archivo en src/assets/icons/)
 // Cambia el nombre según tu archivo real:
-import titleIcon from './assets/icons/title-icon.png'
+import titleIcon from './assets/icons/name-icon.png'
+import nameIcon from './assets/icons/name-icon.png'
 
 // 2) IMÁGENES (empieza con pocas y luego añades)
 // ⚠️ Pon tus archivos reales y ajusta los imports.
@@ -61,7 +62,7 @@ export default function App() {
                 <div className="brand">
                     <img src={titleIcon} alt="Title icon" />
                     <div style={{ textAlign: 'left' }}>
-                        <h1>María Mesa</h1>
+                        <img src={nameIcon} alt="Name icon" />
                         <p className="subtitle">Illustration • Sketchbook • Handmade • Web</p>
                     </div>
                 </div>
