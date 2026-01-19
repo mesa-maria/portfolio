@@ -8,6 +8,7 @@ import sketchbookPng from './assets/icons/sketchbook-icon.png'
 import animationsPng from './assets/icons/animations-icon.png'
 import craftsPng from './assets/icons/crafts-icon.png'
 import contactPng from './assets/icons/contact-icon.png'
+import signature from './assets/labels/signature.png'
 
 // DIBUJOS TERMINADOS
 import finished1 from './assets/art/finished/finished-1.jpg'
@@ -178,20 +179,29 @@ export default function App() {
 
                     <div className="grid">
                         <figure className="card">
-                            <video
-                                className="video"
-                                src={anim1}
-                                controls
-                                playsInline
-                                preload="metadata"
-                            />
-                            <video
-                                className="video"
-                                src={anim2}
-                                controls
-                                playsInline
-                                preload="metadata"
-                            />
+                            <div className="reelFrame">
+                                <video
+                                    className="reel"
+                                    src={anim1}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    preload="metadata"
+                                />
+                            </div>
+                            <div className="reelFrame">
+                                <video
+                                    className="reel"
+                                    src={anim2}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    preload="metadata"
+                                />
+                            </div>
+
                         </figure>
                     </div>
                 </section>
@@ -225,7 +235,9 @@ export default function App() {
                 </section>
             </main>
 
-            <footer className="footer">© {new Date().getFullYear()} María Mesa</footer>
+            <footer className="footer">
+                <img className="signature" src={signature} alt="Firma" />
+            </footer>
 
             {/* MODAL */}
             {openImg && (
