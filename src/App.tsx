@@ -16,8 +16,8 @@ import sketch2 from './assets/art/sketchbook/page-2.jpg'
 import sketch3 from './assets/art/sketchbook/page-3.jpg'
 
 // ANIMACIONES (MP4)
-import anim1 from './assets/animations/animation-1.mp4'
-import anim2 from './assets/animations/animation-2.mp4'
+import anim1 from './assets/art/animations/animation-1.mp4'
+import anim2 from './assets/art/animations/animation-2.mp4'
 
 // ARTESANÍA
 import craftA1 from './assets/art/crafts/craft-a-1.jpg'
