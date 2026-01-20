@@ -86,9 +86,10 @@ function MiniCarousel({ photos, altBase }: { photos: string[]; altBase: string }
 
     return (
         <div className="miniCarousel">
-            <button className="btn small" onClick={prev} aria-label="Anterior">←</button>
             <img className="miniImg" src={photos[i]} alt={`${altBase} ${i + 1}`} loading="lazy" />
-            <button className="btn small" onClick={next} aria-label="Siguiente">→</button>
+
+            <button className="miniArrow left" onClick={prev} aria-label="Anterior">‹</button>
+            <button className="miniArrow right" onClick={next} aria-label="Siguiente">›</button>
         </div>
     )
 }
