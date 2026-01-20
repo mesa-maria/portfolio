@@ -259,11 +259,14 @@ a {
 ====================================================== */
 
 .reelFrame {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  background: #ffffff;
-  display: grid;
-  place-items: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .reelFrame {
+    max-width: 100%;
+  }
 }
 
 .reel {
@@ -294,14 +297,18 @@ a {
 }
 
 .miniImg {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  display: block;
+  object-fit: contain;
+  background: #ffffff;
 }
 
+
+.grid,
+.sketchWrap,
+.reelFrame,
+.miniCarousel {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ======================================================
    MODAL
