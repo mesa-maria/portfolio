@@ -224,7 +224,6 @@ export default function App() {
                                         photos={items.map(i => i.src)}
                                         altBase={project}
                                     />
-                                    <figcaption className="cap">{project}</figcaption>
                                 </figure>
                             ))}
                     </div>
