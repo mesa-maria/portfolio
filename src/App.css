@@ -154,6 +154,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
+  justify-items: center;
 }
 
 .card {
@@ -197,6 +198,8 @@ a {
 
 .sketchWrap {
   margin-top: 18px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   gap: 12px;
   justify-items: center;
@@ -294,9 +297,10 @@ a {
   align-items: center;
   gap: 10px;
   padding: 10px;
+
   max-width: 360px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .miniImg {
