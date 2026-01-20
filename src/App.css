@@ -1,3 +1,7 @@
+/* ======================================================
+   VARIABLES Y BASE
+====================================================== */
+
 :root {
   --ink: #4154a6;
   --paper: #fffdf6;
@@ -11,7 +15,14 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}
+
+
+/* ======================================================
+   LAYOUT GENERAL
+====================================================== */
 
 .page {
   max-width: 980px;
@@ -27,37 +38,26 @@ a { color: inherit; }
   margin-top: 6px;
 }
 
-.footer{
+.footer {
   margin-top: 56px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  opacity: 0.95;
+  opacity: 0.75;
+  font-size: 14px;
 }
 
-.signature{
+.signature {
   width: 180px;
   height: auto;
   display: block;
 }
 
-.reelFrame{
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  background: #ffffff;
-  display: grid;
-  place-items: center;
-}
 
-.reel{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
+/* ======================================================
+   BRAND / HEADER
+====================================================== */
 
-
-/* HEADER */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -68,24 +68,12 @@ a { color: inherit; }
   text-align: left;
 }
 
-.titleIcon{
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-}
-
-.sectionTitleIcon{
-  max-width: 420px;
-  width: 86vw;
-  height: auto;
-}
-
-.brandText{
+.brandText {
   display: grid;
   gap: 6px;
 }
 
-.nameIcon{
+.nameIcon {
   max-width: 520px;
   width: 86vw;
   height: auto;
@@ -96,7 +84,23 @@ a { color: inherit; }
   opacity: 0.82;
 }
 
-/* NAV */
+.titleIcon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.sectionTitleIcon {
+  max-width: 420px;
+  width: 86vw;
+  height: auto;
+}
+
+
+/* ======================================================
+   NAV
+====================================================== */
+
 .nav {
   display: flex;
   gap: 16px;
@@ -118,7 +122,11 @@ a { color: inherit; }
   opacity: 1;
 }
 
-/* SECTIONS */
+
+/* ======================================================
+   SECCIONES
+====================================================== */
+
 .section {
   margin-top: 42px;
   padding-top: 18px;
@@ -136,7 +144,11 @@ a { color: inherit; }
   opacity: 0.88;
 }
 
-/* GRID */
+
+/* ======================================================
+   GRID Y CARDS
+====================================================== */
+
 .grid {
   margin-top: 18px;
   display: grid;
@@ -144,7 +156,6 @@ a { color: inherit; }
   gap: 14px;
 }
 
-/* CARD base */
 .card {
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -152,8 +163,18 @@ a { color: inherit; }
   background: rgba(65, 84, 166, 0.03);
 }
 
-/* TERMINADOS: botones imagen*/
-.imgButton{
+.cap {
+  padding: 10px 12px;
+  font-size: 14px;
+  opacity: 0.92;
+}
+
+
+/* ======================================================
+   TERMINADOS
+====================================================== */
+
+.imgButton {
   padding: 0;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -162,21 +183,18 @@ a { color: inherit; }
   cursor: pointer;
 }
 
-.imgButton img{
+.imgButton img {
   width: 100%;
   height: 260px;
   object-fit: cover;
   display: block;
 }
 
-/* CAPTION */
-.cap {
-  padding: 10px 12px;
-  font-size: 14px;
-  opacity: 0.92;
-}
 
-/* SKETCHBOOK */
+/* ======================================================
+   SKETCHBOOK
+====================================================== */
+
 .sketchWrap {
   margin-top: 18px;
   display: grid;
@@ -207,6 +225,16 @@ a { color: inherit; }
   align-items: center;
 }
 
+.counter {
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+
+/* ======================================================
+   BOTONES
+====================================================== */
+
 .btn {
   background: transparent;
   color: var(--ink);
@@ -216,30 +244,48 @@ a { color: inherit; }
   cursor: pointer;
 }
 
+.btn.small {
+  padding: 8px 10px;
+}
+
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-.counter {
-  opacity: 0.85;
-  font-size: 14px;
+
+/* ======================================================
+   ANIMACIONES
+====================================================== */
+
+.reelFrame {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
 }
 
-/* ANIMACIONES */
-.video{
+.reel {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.video {
   width: 100%;
   height: 260px;
-  display: block;
   object-fit: cover;
+  display: block;
 }
 
-/* ARTESANÍA: mini carrusel */
-.btn.small{
-  padding: 8px 10px;
-}
 
-.miniCarousel{
+/* ======================================================
+   ARTESANÍA (MINI CARRUSEL)
+====================================================== */
+
+.miniCarousel {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -247,7 +293,7 @@ a { color: inherit; }
   padding: 10px;
 }
 
-.miniImg{
+.miniImg {
   width: 100%;
   height: 260px;
   object-fit: cover;
@@ -256,15 +302,12 @@ a { color: inherit; }
   display: block;
 }
 
-/* FOOTER */
-.footer {
-  margin-top: 56px;
-  opacity: 0.75;
-  font-size: 14px;
-}
 
-/* MODAL */
-.modal{
+/* ======================================================
+   MODAL
+====================================================== */
+
+.modal {
   position: fixed;
   inset: 0;
   background: rgba(255, 253, 246, 0.92);
@@ -274,7 +317,7 @@ a { color: inherit; }
   padding: 18px;
 }
 
-.modalImg{
+.modalImg {
   max-width: min(1100px, 95vw);
   max-height: 85vh;
   border: 1px solid var(--border);
@@ -282,7 +325,7 @@ a { color: inherit; }
   background: var(--paper);
 }
 
-.modalClose{
+.modalClose {
   position: fixed;
   top: 14px;
   right: 14px;
@@ -294,12 +337,21 @@ a { color: inherit; }
   cursor: pointer;
 }
 
-/* RESPONSIVE */
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
-  .imgButton img { height: 240px; }
-  .video { height: 240px; }
-  .miniImg { height: 240px; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .imgButton img,
+  .video,
+  .miniImg {
+    height: 240px;
+  }
 }
 
 @media (min-width: 901px) {
