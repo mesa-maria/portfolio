@@ -22,21 +22,53 @@ const artFiles = import.meta.glob(
 )
 
 type ArtItem = { src: string }
-type ArtIndex = Record<string, ArtItem[]>
+
+type ArtIndex = {
+    finished: ArtItem[]
+    sketchbook: ArtItem[]
+    animations: ArtItem[]
+    crafts: Record<string, ArtItem[]>
+}
 
 function buildArtIndex(files: Record<string, string>): ArtIndex {
-    const out: ArtIndex = {}
+    const out: ArtIndex = {
+        finished: [],
+        sketchbook: [],
+        animations: [],
+        crafts: {}
+    }
 
     for (const [path, url] of Object.entries(files)) {
         const parts = path.split('/')
         const folder = parts[3] // finished | sketchbook | animations | crafts
+        const file = parts[4]
 
-        if (!out[folder]) out[folder] = []
-        out[folder].push({ src: url })
+        switch (folder) {
+            case 'finished':
+                out.finished.push({ src: url })
+                break
+
+            case 'sketchbook':
+                out.sketchbook.push({ src: url })
+                break
+
+            case 'animations':
+                out.animations.push({ src: url })
+                break
+
+            case 'crafts': {
+                const project = file.split('-').slice(0, 2).join('-')
+                const arr = (out.crafts[project] ??= [])
+                arr.push({ src: url })
+                break
+            }
+        }
     }
 
-    // ordenar de forma estable
-    Object.values(out).forEach(arr =>
+    out.finished.sort((a, b) => a.src.localeCompare(b.src))
+    out.sketchbook.sort((a, b) => a.src.localeCompare(b.src))
+    out.animations.sort((a, b) => a.src.localeCompare(b.src))
+    Object.values(out.crafts).forEach(arr =>
         arr.sort((a, b) => a.src.localeCompare(b.src))
     )
 
@@ -183,12 +215,16 @@ export default function App() {
                 <section id="crafts" className="section">
                     <img className="sectionTitleIcon" src={craftsPng} alt="Artesanía" />
                     <div className="grid">
-                        {art.crafts?.length > 0 && (
-                            <MiniCarousel
-                                photos={art.crafts.map(i => i.src)}
-                                altBase="Artesanía"
-                            />
-                        )}
+                        {art.crafts &&
+                            Object.entries(art.crafts).map(([project, items]) => (
+                                <figure className="card" key={project}>
+                                    <MiniCarousel
+                                        photos={items.map(i => i.src)}
+                                        altBase={project}
+                                    />
+                                    <figcaption className="cap">{project}</figcaption>
+                                </figure>
+                            ))}
                     </div>
                 </section>
 
