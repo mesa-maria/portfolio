@@ -162,32 +162,34 @@ export default function App() {
                     <img className="sectionTitleIcon" src={sketchbookPng} alt="Sketchbook" />
                     <p>Una de mis libretas de dibujo. ¡Desliza o usa las flechas para ojear!</p>
 
-                    <div
-                        className="sketchFrame"
-                        onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
-                        onTouchEnd={e => {
-                            if (touchStartX === null) return
-                            const dx = e.changedTouches[0].clientX - touchStartX
-                            if (dx > 40) setPage(p => Math.max(0, p - 1))
-                            if (dx < -40) setPage(p => Math.min(sketchPages.length - 1, p + 1))
-                            setTouchStartX(null)
-                        }}
-                    >
-                        <img src={sketchPages[page]} alt={`Página ${page + 1}`} />
-                    </div>
-
-                    <div className="sketchControls">
-                        <button className="btn" onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
-                            ← Anterior
-                        </button>
-                        <span>Página {page + 1} / {sketchPages.length}</span>
-                        <button
-                            className="btn"
-                            onClick={() => setPage(p => Math.min(sketchPages.length - 1, p + 1))}
-                            disabled={page === sketchPages.length - 1}
+                    <div className="sketchWrap">
+                        <div
+                            className="sketchFrame"
+                            onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
+                            onTouchEnd={e => {
+                                if (touchStartX === null) return
+                                const dx = e.changedTouches[0].clientX - touchStartX
+                                if (dx > 40) setPage(p => Math.max(0, p - 1))
+                                if (dx < -40) setPage(p => Math.min(sketchPages.length - 1, p + 1))
+                                setTouchStartX(null)
+                            }}
                         >
-                            Siguiente →
-                        </button>
+                            <img src={sketchPages[page]} alt={`Página ${page + 1}`} />
+                        </div>
+
+                        <div className="sketchControls">
+                            <button className="btn" onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
+                                ← Anterior
+                            </button>
+                            <span>Página {page + 1} / {sketchPages.length}</span>
+                            <button
+                                className="btn"
+                                onClick={() => setPage(p => Math.min(sketchPages.length - 1, p + 1))}
+                                disabled={page === sketchPages.length - 1}
+                            >
+                                Siguiente →
+                            </button>
+                        </div>
                     </div>
                 </section>
 
