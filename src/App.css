@@ -25,7 +25,7 @@ a {
 ====================================================== */
 
 .page {
-  max-width: 980px;
+  /*max-width: 980px;*/
   margin: 0 auto;
   padding: 36px 18px 70px;
   text-align: center;
