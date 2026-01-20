@@ -82,6 +82,7 @@ a {
 .subtitle {
   margin: 0;
   opacity: 0.82;
+  text-align: center;
 }
 
 .titleIcon {
@@ -152,10 +153,11 @@ a {
 .grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
+
 
 .card {
   border: 1px solid var(--border);
@@ -198,12 +200,11 @@ a {
 
 .sketchWrap {
   margin-top: 18px;
-  margin-left: auto;
-  margin-right: auto;
   display: grid;
   gap: 12px;
   justify-items: center;
 }
+
 
 .sketchFrame {
   width: min(640px, 100%);
