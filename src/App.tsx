@@ -1,96 +1,91 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
-// ICONOS / LABELS
+// ICONOS
 import namePng from './assets/icons/name-icon.png'
 import finishedPng from './assets/icons/finished-icon.png'
 import sketchbookPng from './assets/icons/sketchbook-icon.png'
 import animationsPng from './assets/icons/animations-icon.png'
 import craftsPng from './assets/icons/crafts-icon.png'
 import contactPng from './assets/icons/contact-icon.png'
+
+// LABELS
 import signature from './assets/labels/signature.png'
 
-// DIBUJOS TERMINADOS
-import finished1 from './assets/art/finished/finished-1.jpg'
-import finished2 from './assets/art/finished/finished-2.jpg'
-import finished3 from './assets/art/finished/finished-3.jpg'
+/* ===============================
+   AUTO-IMPORT DE TODO EL ARTE
+================================ */
 
-// SKETCHBOOK
-import sketch1 from './assets/art/sketchbook/page-1.jpg'
-import sketch2 from './assets/art/sketchbook/page-2.jpg'
-import sketch3 from './assets/art/sketchbook/page-3.jpg'
-import sketch4 from './assets/art/sketchbook/page-4.jpg'
-import sketch5 from './assets/art/sketchbook/page-5.jpg'
-import sketch6 from './assets/art/sketchbook/page-6.jpg'
-import sketch7 from './assets/art/sketchbook/page-7.jpg'
-import sketch8 from './assets/art/sketchbook/page-8.jpg'
-import sketch9 from './assets/art/sketchbook/page-9.jpg'
+const artFiles = import.meta.glob(
+    './assets/art/**/*.{jpg,jpeg,png,webp,gif,mp4,webm,mov}',
+    { eager: true, as: 'url' }
+)
 
-// ANIMACIONES (MP4)
-import anim1 from './assets/art/animations/animation-1.mp4'
-import anim2 from './assets/art/animations/animation-2.mp4'
+type ArtItem = { src: string }
+type ArtIndex = Record<string, ArtItem[]>
 
-// ARTESANÍA
-import craftA1 from './assets/art/crafts/craft-a-1.jpg'
-import craftA2 from './assets/art/crafts/craft-a-2.jpg'
-import craftA3 from './assets/art/crafts/craft-a-3.jpg'
+function buildArtIndex(files: Record<string, string>): ArtIndex {
+    const out: ArtIndex = {}
 
-type Item = { src: string }
-type CraftProject = { title: string; photos: string[] }
+    for (const [path, url] of Object.entries(files)) {
+        const parts = path.split('/')
+        const folder = parts[3] // finished | sketchbook | animations | crafts
+
+        if (!out[folder]) out[folder] = []
+        out[folder].push({ src: url })
+    }
+
+    // ordenar de forma estable
+    Object.values(out).forEach(arr =>
+        arr.sort((a, b) => a.src.localeCompare(b.src))
+    )
+
+    return out
+}
+
+/* ===============================
+   COMPONENTES AUXILIARES
+================================ */
 
 function MiniCarousel({ photos, altBase }: { photos: string[]; altBase: string }) {
     const [i, setI] = useState(0)
-    const prev = () => setI((x) => (x === 0 ? photos.length - 1 : x - 1))
-    const next = () => setI((x) => (x === photos.length - 1 ? 0 : x + 1))
+    const prev = () => setI(x => (x === 0 ? photos.length - 1 : x - 1))
+    const next = () => setI(x => (x === photos.length - 1 ? 0 : x + 1))
 
     return (
         <div className="miniCarousel">
-            <button className="btn small" onClick={prev} aria-label="Anterior">
-                ←
-            </button>
-
+            <button className="btn small" onClick={prev} aria-label="Anterior">←</button>
             <img className="miniImg" src={photos[i]} alt={`${altBase} ${i + 1}`} loading="lazy" />
-
-            <button className="btn small" onClick={next} aria-label="Siguiente">
-                →
-            </button>
+            <button className="btn small" onClick={next} aria-label="Siguiente">→</button>
         </div>
     )
 }
 
-export default function App() {
-    // Terminados sin títulos
-    const finished: Item[] = useMemo(
-        () => [{ src: finished1 }, { src: finished2 }, { src: finished3 }],
-        []
-    )
+/* ===============================
+   APP
+================================ */
 
-    const sketchPages = useMemo(() => [sketch1, sketch2, sketch3, sketch4, sketch5,
-    sketch6, sketch7, sketch8, sketch9], [])
+export default function App() {
+    const art = useMemo(() => buildArtIndex(artFiles), [])
+
+    // MODAL
+    const [openImg, setOpenImg] = useState<string | null>(null)
+
+    // SKETCHBOOK
+    const sketchPages = art.sketchbook?.map(i => i.src) ?? []
     const [page, setPage] = useState(0)
     const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
-    // Modal para ver imágenes grandes (terminados / lo que quieras)
-    const [openImg, setOpenImg] = useState<string | null>(null)
-
-    // Teclado ← →
+    // TECLADO
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowLeft') setPage((p) => Math.max(0, p - 1))
-            if (e.key === 'ArrowRight') setPage((p) => Math.min(sketchPages.length - 1, p + 1))
+            if (e.key === 'ArrowLeft') setPage(p => Math.max(0, p - 1))
+            if (e.key === 'ArrowRight') setPage(p => Math.min(sketchPages.length - 1, p + 1))
             if (e.key === 'Escape') setOpenImg(null)
         }
         window.addEventListener('keydown', onKey)
         return () => window.removeEventListener('keydown', onKey)
     }, [sketchPages.length])
-
-    // Artesanía: proyectos con varias fotos
-    const craftProjects: CraftProject[] = useMemo(
-        () => [
-            { title: 'Bañera', photos: [craftA1, craftA2, craftA3] }
-        ],
-        []
-    )
 
     return (
         <div className="page">
@@ -102,7 +97,7 @@ export default function App() {
                     </div>
                 </div>
 
-                <nav className="nav" aria-label="Sections">
+                <nav className="nav">
                     <a href="#finished">Dibujos</a>
                     <a href="#sketchbook">Sketchbook</a>
                     <a href="#animations">Animaciones</a>
@@ -114,16 +109,15 @@ export default function App() {
             <main>
                 {/* TERMINADOS */}
                 <section id="finished" className="section">
-                    <img className="sectionTitleIcon" src={finishedPng} alt="Mis dibujos digitales:" />
+                    <img className="sectionTitleIcon" src={finishedPng} alt="Dibujos terminados" />
                     <p>Una selección de piezas finalizadas.</p>
 
                     <div className="grid">
-                        {finished.map((it, idx) => (
+                        {art.finished?.map(it => (
                             <button
-                                key={idx}
+                                key={it.src}
                                 className="imgButton"
                                 onClick={() => setOpenImg(it.src)}
-                                aria-label={`Abrir imagen terminada ${idx + 1}`}
                             >
                                 <img src={it.src} alt="" loading="lazy" />
                             </button>
@@ -133,56 +127,47 @@ export default function App() {
 
                 {/* SKETCHBOOK */}
                 <section id="sketchbook" className="section">
-                    <img className="sectionTitleIcon" src={sketchbookPng} alt="Mi libreta de dibujo:" />
-                    <p>Desliza en móvil o usa las flechas para pasar páginas.</p>
+                    <img className="sectionTitleIcon" src={sketchbookPng} alt="Sketchbook" />
+                    <p>Desliza o usa las flechas.</p>
 
-                    <div className="sketchWrap">
-                        <div
-                            className="sketchFrame"
-                            onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
-                            onTouchEnd={(e) => {
-                                if (touchStartX === null) return
-                                const dx = e.changedTouches[0].clientX - touchStartX
-                                const threshold = 40
-                                if (dx > threshold) setPage((p) => Math.max(0, p - 1))
-                                if (dx < -threshold) setPage((p) => Math.min(sketchPages.length - 1, p + 1))
-                                setTouchStartX(null)
-                            }}
+                    <div
+                        className="sketchFrame"
+                        onTouchStart={e => setTouchStartX(e.touches[0].clientX)}
+                        onTouchEnd={e => {
+                            if (touchStartX === null) return
+                            const dx = e.changedTouches[0].clientX - touchStartX
+                            if (dx > 40) setPage(p => Math.max(0, p - 1))
+                            if (dx < -40) setPage(p => Math.min(sketchPages.length - 1, p + 1))
+                            setTouchStartX(null)
+                        }}
+                    >
+                        <img src={sketchPages[page]} alt={`Página ${page + 1}`} />
+                    </div>
+
+                    <div className="sketchControls">
+                        <button className="btn" onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}>
+                            ← Anterior
+                        </button>
+                        <span>Página {page + 1} / {sketchPages.length}</span>
+                        <button
+                            className="btn"
+                            onClick={() => setPage(p => Math.min(sketchPages.length - 1, p + 1))}
+                            disabled={page === sketchPages.length - 1}
                         >
-                            <img src={sketchPages[page]} alt={`Sketchbook page ${page + 1}`} loading="eager" />
-                        </div>
-
-                        <div className="sketchControls">
-                            <button className="btn" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}>
-                                ← Anterior
-                            </button>
-
-                            <span className="counter">
-                Página {page + 1} / {sketchPages.length}
-              </span>
-
-                            <button
-                                className="btn"
-                                onClick={() => setPage((p) => Math.min(sketchPages.length - 1, p + 1))}
-                                disabled={page === sketchPages.length - 1}
-                            >
-                                Siguiente →
-                            </button>
-                        </div>
+                            Siguiente →
+                        </button>
                     </div>
                 </section>
 
                 {/* ANIMACIONES */}
                 <section id="animations" className="section">
-                    <img className="sectionTitleIcon" src={animationsPng} alt="Mis animaciones:" />
-                    <p>Piezas animadas en vídeo.</p>
-
+                    <img className="sectionTitleIcon" src={animationsPng} alt="Animaciones" />
                     <div className="grid">
-                        <figure className="card">
-                            <div className="reelFrame">
+                        {art.animations?.map(it => (
+                            <div className="reelFrame" key={it.src}>
                                 <video
                                     className="reel"
-                                    src={anim1}
+                                    src={it.src}
                                     autoPlay
                                     loop
                                     muted
@@ -190,47 +175,30 @@ export default function App() {
                                     preload="metadata"
                                 />
                             </div>
-                            <div className="reelFrame">
-                                <video
-                                    className="reel"
-                                    src={anim2}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    preload="metadata"
-                                />
-                            </div>
-
-                        </figure>
+                        ))}
                     </div>
                 </section>
 
                 {/* ARTESANÍA */}
                 <section id="crafts" className="section">
-                    <img className="sectionTitleIcon" src={craftsPng} alt="Mis proyectos artesanos:" />
-                    <p>Arcilla, piezas físicas, procesos y encargos.</p>
-
+                    <img className="sectionTitleIcon" src={craftsPng} alt="Artesanía" />
                     <div className="grid">
-                        {craftProjects.map((p) => (
-                            <figure className="card" key={p.title}>
-                                <MiniCarousel photos={p.photos} altBase={p.title} />
-                                <figcaption className="cap">{p.title}</figcaption>
-                            </figure>
-                        ))}
+                        {art.crafts?.length > 0 && (
+                            <MiniCarousel
+                                photos={art.crafts.map(i => i.src)}
+                                altBase="Artesanía"
+                            />
+                        )}
                     </div>
                 </section>
 
                 {/* CONTACTO */}
                 <section id="contact" className="section">
-                    <img className="sectionTitleIcon" src={contactPng} alt="Mi contacto:" />
+                    <img className="sectionTitleIcon" src={contactPng} alt="Contacto" />
                     <p>
-                        Email: <a href="mailto:mariagmesa37@gmail.com">mariagmesa37@gmail.com</a>
-                        <br />
-                        GitHub:{' '}
-                        <a href="https://github.com/mesa-maria" target="_blank" rel="noreferrer">
-                            mesa-maria
-                        </a>
+                        Email: <a href="mailto:mariagmesa37@gmail.com">mariagmesa37@gmail.com</a><br />
+                        GitHub: <a href="https://github.com/mesa-maria" target="_blank">mesa-maria</a><br />
+                        Instagram: <a href="https://www.instagram.com/por_la_acera/" target="_blank">@por_la_acera</a>
                     </p>
                 </section>
             </main>
@@ -241,11 +209,9 @@ export default function App() {
 
             {/* MODAL */}
             {openImg && (
-                <div className="modal" role="dialog" aria-modal="true" onClick={() => setOpenImg(null)}>
-                    <button className="modalClose" onClick={() => setOpenImg(null)} aria-label="Cerrar">
-                        ✕
-                    </button>
-                    <img className="modalImg" src={openImg} alt="" onClick={(e) => e.stopPropagation()} />
+                <div className="modal" onClick={() => setOpenImg(null)}>
+                    <button className="modalClose">✕</button>
+                    <img className="modalImg" src={openImg} alt="" onClick={e => e.stopPropagation()} />
                 </div>
             )}
         </div>
