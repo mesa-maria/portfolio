@@ -1,73 +1,142 @@
-# React + TypeScript + Vite
+# 🎨 Portfolio Web — María Mesa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio personal de ilustración, sketchbook, animación y proyectos artesanos, desarrollado como una **web estática con React + Vite**.
 
-Currently, two official plugins are available:
+El proyecto combina una **presentación visual cuidada** con una **arquitectura frontend limpia y mantenible**, pensada para crecer y actualizarse fácilmente sin tocar código innecesario.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Características principales
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🖼️ **Ilustraciones finalizadas**  
+  Galería responsive con vista ampliada en modal.
 
-## Expanding the ESLint configuration
+- 📖 **Sketchbook interactivo**  
+  Navegación por páginas mediante:
+  - botones
+  - teclado
+  - gestos táctiles (móvil)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🎞️ **Animaciones en formato reel**  
+  Vídeos optimizados para web (loop, muted, responsive).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🧱 **Proyectos artesanos**  
+  Mini carruseles independientes por proyecto, agrupados automáticamente.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 📂 **Carga automática del contenido**  
+  Las imágenes y vídeos se importan dinámicamente desde carpetas, sin imports manuales uno a uno.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- 📱 **Diseño responsive**  
+  Adaptado a móvil, tablet y escritorio.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- React
+- Vite
+- TypeScript
+- CSS puro (sin frameworks externos)
+- ESLint (configuración estricta)
+
+---
+
+## 📁 Estructura del proyecto
+
+```txt
+src/
+  assets/
+  art/
+    finished/ # Ilustraciones terminadas
+    sketchbook/ # Páginas del sketchbook
+    animations/ # Vídeos / reels
+    crafts/ # Proyectos artesanos
+  icons/
+  labels/
+  App.tsx
+  main.tsx
+  App.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🎯 Organización del contenido artístico
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Carga automática
+
+El contenido de `src/assets/art` se carga automáticamente mediante `import.meta.glob`, lo que permite:
+
+- Añadir o eliminar obras sin modificar el código
+- Mantener el proyecto limpio y escalable
+- Separar claramente contenido y lógica
+
+### Proyectos artesanos
+
+En la carpeta `crafts`, los proyectos se agrupan por **prefijo del nombre del archivo**:
+
+craft-a-1.jpg
+craft-a-2.jpg
+craft-b-1.jpg
+craft-b-2.jpg
+
+
+Cada prefijo genera automáticamente un **mini carrusel independiente**.
+
+---
+
+## 🚀 Instalación y uso
+
+### Requisitos
+
+- Node.js LTS (v18 o superior)
+
+### Instalación
+
+`npm install`
+
+### Servidor de desarrollo
+
+`npm run dev`
+
+La aplicación estará disponible en:
+
+`http://localhost:5173`
+
+### Build de producción
+
+`npm run build`
+
+---
+
+## 🧠 Decisiones de diseño y arquitectura
+
+- Separación clara entre contenido y código
+- Evitar dependencias innecesarias de UI
+- Control total del diseño con CSS nativo
+- Componentes simples y reutilizables
+- Accesibilidad básica respetada (focus visible, navegación por teclado)
+
+Este proyecto funciona tanto como:
+
+- Portfolio artístico
+- Ejercicio de frontend moderno
+- Base escalable para una web personal
+
+---
+
+## 👩‍🎨 Autora
+
+**María Mesa**  
+Ilustración · Sketchbook · Artesanía · Web  
+
+- Email: mariagmesa37@gmail.com  
+- GitHub: https://github.com/mesa-maria  
+- Instagram: https://www.instagram.com/por_la_acera/
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de uso personal.
+
+Las obras artísticas mostradas en este repositorio están protegidas por derechos de autor y no pueden reproducirse, modificarse ni utilizarse sin el consentimiento expreso de la autora.
