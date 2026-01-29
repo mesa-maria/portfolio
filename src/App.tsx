@@ -126,7 +126,6 @@ export default function App() {
                 <div className="brand">
                     <div className="brandText">
                         <img className="nameIcon" src={namePng} alt="María Mesa" />
-                        <p className="subtitle">Algunos dibujos y proyectos que he hecho, ¡espero que te gusten!</p>
                     </div>
                 </div>
 
@@ -143,7 +142,6 @@ export default function App() {
                 {/* TERMINADOS */}
                 <section id="finished" className="section">
                     <img className="sectionTitleIcon" src={finishedPng} alt="Dibujos terminados" />
-                    <p>Dibujos terminados, algunos en físico y otros en digital.</p>
 
                     <div className="grid">
                         {art.finished?.map(it => (
@@ -161,7 +159,6 @@ export default function App() {
                 {/* SKETCHBOOK */}
                 <section id="sketchbook" className="section">
                     <img className="sectionTitleIcon" src={sketchbookPng} alt="Sketchbook" />
-                    <p>Una de mis libretas de dibujo. ¡Desliza o usa las flechas para ojear!</p>
 
                     <div className="sketchWrap">
                         <div
@@ -197,7 +194,6 @@ export default function App() {
                 {/* ANIMACIONES */}
                 <section id="animations" className="section">
                     <img className="sectionTitleIcon" src={animationsPng} alt="Animaciones" />
-                    <p>Animaciones e intentos de stop motion.</p>
                     <div className="grid">
                         {art.animations?.map(it => (
                             <div className="reelFrame" key={it.src}>
@@ -218,7 +214,6 @@ export default function App() {
                 {/* ARTESANÍA */}
                 <section id="crafts" className="section">
                     <img className="sectionTitleIcon" src={craftsPng} alt="Artesanía" />
-                    <p>Cosinas de arcilla.</p>
                     <div className="grid">
                         {art.crafts &&
                             Object.entries(art.crafts).map(([project, items]) => (
@@ -235,7 +230,6 @@ export default function App() {
                 {/* CONTACTO */}
                 <section id="contact" className="section">
                     <img className="sectionTitleIcon" src={contactPng} alt="Contacto" />
-                    <p>Si te ha gustado, puedes encontrarme en más sitios:</p>
                     <p>
                         Email: <a href="mailto:mariagmesa37@gmail.com">mariagmesa37@gmail.com</a><br />
                         GitHub: <a href="https://github.com/mesa-maria" target="_blank">mesa-maria</a><br />
