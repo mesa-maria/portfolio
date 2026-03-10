@@ -74,4 +74,11 @@ a:hover {
 .section {
   border: 1px solid #535bf2;
   border-radius: 5px;
+
+  display: flex;
+}
+
+.art-image {
+  width: auto;
+  height: 100px;
 }
