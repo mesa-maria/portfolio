@@ -31,16 +31,11 @@ body {
   min-height: 0;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(14, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   align-items: center;
   justify-content: center;
   position: relative;
-}
-
-.desktop-grid-icon {
-  height: 64px;
-  width: 64px;
 }
 
 /* TOOLBAR */
@@ -133,8 +128,9 @@ body {
 }
 
 .grid-icon {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
 }
 
 .tray-clock {
